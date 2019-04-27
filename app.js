@@ -12,10 +12,11 @@ var app = express();
 // add support for socket.io
 var server = require('http').Server(app); // create the http server
 var io = require('socket.io')(server); // set up websockets
+var connection = require('./socketio/connection.js')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
+app.set('view engine', 'pug');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -26,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 // use the socket.io
 app.use(function(req, res, next) {
     res.io = io;
+    req.io = io;
     next();
 });
 
@@ -48,5 +50,7 @@ app.use(function(err, req, res, next) {
     res.render('error');
 });
 
+io.on('connection', connection.newConnection);
+
 // exports app and server which will use in www
-module.exports = { app: app, server: server };
+module.exports = { app: app, server: server, io: io };
