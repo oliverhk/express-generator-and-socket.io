@@ -15,14 +15,14 @@ Then you have **npm run dev** to launch the server using nodemon and **npm run s
 
 Because implementing Socket.io in Express is not an easy thing, you can use this repository which is ready to use!
 
-#### bin/www & app.js
+#### *bin/www* & *app.js*
 
-Unlike Express, the server is no longer created in the www file but directly in app.js . It is subsequently imported into www by:
+Unlike Express, the server is no longer created in the www file but directly in *app.js* . It is subsequently imported into www by:
 ```
 var server = require('../app').server;
 ```
 
-So the server is create in app.js and the base of Socket.io jsut after because Socket.io needs the use the http server !
+So the server is create in *app.js* and the base of Socket.io jsut after because Socket.io needs the use the http server.
 ```
 var app = express();
 // add support for socket.io
@@ -35,3 +35,6 @@ Then, to be able to use the websockets, you have to create a function which is c
 var connection = require('./socketio/connection.js')
 io.on('connection', connection.newConnection);
 ```
+
+#### *socketio*
+
