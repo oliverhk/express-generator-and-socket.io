@@ -36,5 +36,50 @@ var connection = require('./socketio/connection.js')
 io.on('connection', connection.newConnection);
 ```
 
-#### *socketio*
+#### */socketio/connection.js*
+
+As you can see, there is a socketio folder that contains connection.js. The latter contains the callback function during a new connection to the server.
+
+In this function, you can put your listeners and transmitters there. You can also import them from another file that contains the callback functions of listeners.
+```
+exports.newConnection = function(client) {
+    console.log('Client connected...')
+    
+    ...
+
+    client.on('disconnect', function(data) {
+        console.log('Client disconnected...');
+    })
+}
+```
+
+So every client will have a unique connection to the server using Socket.io !
+
+#### */public/javascripts/socketScript.js*
+
+If you want the client-server connection to be functional, the client must also be able to handle socket.io.
+
+For this, you need 2 client-side scripts!
+```
+script (src = "/ socket.io/socket.io.js")
+script (src = "/ javascript / socketScript.js")
+```
+
+The first is a librarie, nothing to install!
+
+The second is the one that will allow you to manage emitters and listeners.
+
+First, we create the connection with the server:
+```
+var socket = io.connect (location.host);
+```
+
+Then just listen to the server or send it data!
+
+## Conclusion
+
+**That's it, ready to code, your server and your client communicates with a bi-directional real-time link!**
+
+Have fun !
+
 
