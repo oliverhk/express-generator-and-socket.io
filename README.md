@@ -61,8 +61,8 @@ If you want the client-server connection to be functional, the client must also 
 
 For this, you need 2 client-side scripts!
 ```
-script (src = "/ socket.io/socket.io.js")
-script (src = "/ javascript / socketScript.js")
+script(src="/socket.io/socket.io.js")
+script(src="/javascript/socketScript.js")
 ```
 
 The first is a librarie, nothing to install!
@@ -71,7 +71,7 @@ The second is the one that will allow you to manage emitters and listeners.
 
 First, we create the connection with the server:
 ```
-var socket = io.connect (location.host);
+var socket = io.connect(location.host)
 ```
 
 Then just listen to the server or send it data!
