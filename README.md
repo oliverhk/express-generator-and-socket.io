@@ -21,8 +21,17 @@ Unlike Express, the server is no longer created in the www file but directly in 
 ```
 var server = require('../app').server;
 ```
-So the server is create in app.js
 
-In these files, created with express-generator, is implemented socket.io, so websokets are enable and it is so cool !
+So the server is create in app.js and the base of Socket.io jsut after because Socket.io needs the use the http server !
+```
+var app = express();
+// add support for socket.io
+var server = require('http').Server(app); // create the http server
+var io = require('socket.io')(server); // set up websockets
+```
 
-I use the site to do this: https://onedesigncompany.com/news/express-generator-and-socket-io
+Then, to be able to use the websockets, you have to create a function which is call when there is a new connection.
+```
+var connection = require('./socketio/connection.js')
+io.on('connection', connection.newConnection);
+```
